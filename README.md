@@ -1,4 +1,3 @@
-
 PREPARATION
 ========
 To install doorGets, you need a remote web server or on your computer (MAMP), with access to a database like MySQL. You'll need access to phpMyAdmin to create a database and to indicate the information in the database in the installer.
@@ -10,3 +9,7 @@ INSTALLATION
 Simply go to your ddorGets web directory and use installer :-)
 
 If you have any PHP error, perhaps you don't have PHP5 or you need to activate it on your web host. Please go to our forum to find pre-installation settings (PHP 5, htaccess) for certain hosting services (1&1, Free, Lycos, OVH, Infomaniak, Amen, GoDaddy, etc).
+
+DIDACTICIEL
+========
+http://www.youtube.com/watch?v=YGbr0g8-KdI
