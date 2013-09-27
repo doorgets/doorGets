@@ -31,10 +31,22 @@
 ******************************************************************************
 ******************************************************************************/
 
-session_start();
-
-define('BASE','./setup/');
-define('__DOORGETS__','http://www.doorgets.com/'); // Ne pas supprimer
-require_once BASE.'config/config.php';
-
-require_once ROUTER.'installerRouter.php';
+class doorgetsModel {
+    
+    public $doorgets;
+    
+    public function __construct($doorgets){
+        
+        $this->doorgets = $doorgets;
+        $this->indexAction();
+        
+    }
+    
+    public function indexAction(){
+        
+        $actionName = $this->doorgets->getStep();
+        
+    }
+    
+    
+}

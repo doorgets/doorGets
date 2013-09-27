@@ -30,11 +30,9 @@
     
 ******************************************************************************
 ******************************************************************************/
-
-session_start();
-
-define('BASE','./setup/');
-define('__DOORGETS__','http://www.doorgets.com/'); // Ne pas supprimer
-require_once BASE.'config/config.php';
-
-require_once ROUTER.'installerRouter.php';
+?>
+<div>
+    <?php echo $this->form['prev_step']->open('post','',''); ?>
+        <?php echo $this->form['prev_step']->input('','hidden','hidden','1'); ?>
+        <?php echo $this->form['prev_step']->submit($this->l('Etape précédente'),'','submit-prev');  echo $this->form['prev_step']->close(); ?>
+</div>

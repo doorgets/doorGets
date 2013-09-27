@@ -30,11 +30,27 @@
     
 ******************************************************************************
 ******************************************************************************/
-
-session_start();
-
-define('BASE','./setup/');
-define('__DOORGETS__','http://www.doorgets.com/'); // Ne pas supprimer
-require_once BASE.'config/config.php';
-
-require_once ROUTER.'installerRouter.php';
+?>
+<div class="doorGets-content-wrapper">
+    <div class="doorGets-top-title-content">
+            doorGets 5.0
+        </div>
+    <div class="doorGets-title-content">
+        2/5 - <?php echo $doorgets->l("Vérification de vos droits d'écriture"); ?>
+    </div>
+    <?php if($this->isChmod777()): ?>
+        <div class="info-ok">
+            <?php echo $doorgets->l("Vous avez bien les droits d'écriture !"); ?>
+        </div>
+        <?php echo $doorgets->form['doorgets_chmod']->open('post','',''); ?>
+            <?php echo $doorgets->form['doorgets_chmod']->input('','hidden','hidden','1'); ?>
+            <div class="separateur-tb"></div>
+            <div class="separateur-tb"></div>
+            <?php echo $doorgets->form['doorgets_chmod']->submit($doorgets->l('Etape suivante'),'','submit-next'); ?>
+        <?php echo $doorgets->form['doorgets_chmod']->close();  else: ?>
+        <div class="info-no-ok">
+            <?php echo $doorgets->l("Votre dossier n'a pas les droits d'écriture..."); ?>
+        </div>
+        <div class="separateur-tb"></div>
+    <?php endif;  echo $doorgets->getHtmlGoBack(); ?>
+</div>

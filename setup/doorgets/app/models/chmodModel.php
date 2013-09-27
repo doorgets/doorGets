@@ -31,10 +31,37 @@
 ******************************************************************************
 ******************************************************************************/
 
-session_start();
-
-define('BASE','./setup/');
-define('__DOORGETS__','http://www.doorgets.com/'); // Ne pas supprimer
-require_once BASE.'config/config.php';
-
-require_once ROUTER.'installerRouter.php';
+class chmodModel extends doorgetsModel{
+    
+    public function __construct($doorgets){
+        
+        parent::__construct($doorgets);
+        
+    }
+    
+    public function indexAction(){
+        
+        $actionName = $this->doorgets->getStep();
+        
+        $form = $this->doorgets->form['doorgets_'.$actionName]  = new Formulaire('doorgets_'.$actionName);
+        
+        if( !empty($form->i) && empty($form->e) )
+        {
+            $StepsList = $this->doorgets->getStepsList();
+            $iPos = 1; $pos = array_keys($StepsList,$actionName);
+            
+            if(!empty($pos)){ $pos = (int)$pos[0]; }
+            
+            if($pos <= count($StepsList)){
+                
+                $nexPos = $pos + 1;
+                $this->doorgets->setStep($StepsList[$nexPos]);
+                
+                // to do              
+            }
+            
+            header("Location:".$_SERVER['REQUEST_URI']); exit();
+        }
+    }
+    
+}

@@ -30,11 +30,30 @@
     
 ******************************************************************************
 ******************************************************************************/
-
-session_start();
-
-define('BASE','./setup/');
-define('__DOORGETS__','http://www.doorgets.com/'); // Ne pas supprimer
-require_once BASE.'config/config.php';
-
-require_once ROUTER.'installerRouter.php';
+?>
+<div class="doorGets-content-wrapper">
+    <div class="doorGets-top-title-content">
+        doorGets 5.0
+    </div>
+    <div class="doorGets-title-content">
+        <?php echo $doorgets->l("Vous avez presque fini..."); ?>
+    </div>
+    <?php echo $doorgets->form['doorgets_polymorphic']->open('post','',''); ?>
+        <?php echo $doorgets->form['doorgets_polymorphic']->input('','hidden','hidden','1'); ?>
+        <div class="t-polymorphic-center">
+            <div>
+                <?php echo $doorgets->l("Cliquez sur le bouton ci-dessous pour générer votre site."); ?>
+                <br />
+                <?php echo $doorgets->l("Vous allez être ensuite redirigé vers la page d'administration."); ?>
+                <br /><br />
+            </div>
+            <?php echo $doorgets->form['doorgets_polymorphic']->submit($doorgets->l('Génerer mon site internet doorGets')); ?>
+            <div>
+                <br />
+                <i>" <?php echo $doorgets->l('Merci'); ?> ! "</i> 
+            </div>
+        </div>
+    <?php echo $doorgets->form['doorgets_polymorphic']->close(); ?>
+    <div class="separateur-tb"></div>
+    <?php echo $doorgets->getHtmlGoBack(); ?>
+</div>

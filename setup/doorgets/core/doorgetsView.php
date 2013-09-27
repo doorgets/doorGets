@@ -31,10 +31,29 @@
 ******************************************************************************
 ******************************************************************************/
 
-session_start();
-
-define('BASE','./setup/');
-define('__DOORGETS__','http://www.doorgets.com/'); // Ne pas supprimer
-require_once BASE.'config/config.php';
-
-require_once ROUTER.'installerRouter.php';
+class doorgetsView {
+    
+    public $content;
+    
+    public $doorgets;
+    
+    public function __construct($doorgets){
+        
+        $this->doorgets = $doorgets;
+        $this->initContent();
+        $this->doorgets->setContent($this->content);
+    }
+    
+    public function initContent(){
+        
+        $doorgets = $this->doorgets;
+        $ActionFile = $this->doorgets->getStep();
+        
+        $tpl = Template::getView($ActionFile);
+        ob_start(); if(is_file($tpl)){ include $tpl; } $out = ob_get_clean();
+        $this->content = $out;
+        
+    }
+    
+    
+}

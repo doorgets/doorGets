@@ -31,10 +31,26 @@
 ******************************************************************************
 ******************************************************************************/
 
-session_start();
-
-define('BASE','./setup/');
-define('__DOORGETS__','http://www.doorgets.com/'); // Ne pas supprimer
-require_once BASE.'config/config.php';
-
-require_once ROUTER.'installerRouter.php';
+class chmodView extends doorgetsView{
+    
+    public function __construct($doorgets){
+        parent::__construct($doorgets);
+    }
+    
+    public function isChmod777(){
+        
+        try{
+            
+            $file = dirname('index.php');
+            if(@is_writable($file)){
+                return true;
+            }
+            
+            return false;
+            
+        }catch(Exception $e){  }
+        
+    }
+    
+    
+}

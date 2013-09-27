@@ -31,10 +31,30 @@
 ******************************************************************************
 ******************************************************************************/
 
-session_start();
 
-define('BASE','./setup/');
-define('__DOORGETS__','http://www.doorgets.com/'); // Ne pas supprimer
-require_once BASE.'config/config.php';
+define('APP',BASE.'doorgets/app/');
+define('CORE',BASE.'doorgets/core/');
+define('LIB',BASE.'doorgets/lib/');
+define('CONFIG',BASE.'doorgets/config/');
+define('TEMPLATE',BASE.'doorgets/template/');
+define('ROUTER',BASE.'doorgets/routers/');
+define('CONFIGURATION',BASE.'config/');
 
-require_once ROUTER.'installerRouter.php';
+define('THEME',BASE.'themes/');
+
+define('LANGUE',BASE.'doorgets/locale/');
+define('LANGUE_DEFAULT_FILE',BASE.'doorgets/locale/temp.lg.php');
+
+define('CONTROLLERS',BASE.'doorgets/app/controllers/');
+define('MODELS',BASE.'doorgets/app/models/');
+define('VIEW',BASE.'doorgets/app/views/');
+
+define('CACHE_TEMPLATE',BASE.'cache/template/');
+
+define('BASE_IMG',BASE.'skin/img/');
+define('BASE_CSS',BASE.'skin/css/');
+define('BASE_JS',BASE.'skin/js/');
+
+require_once CORE.'doorgetsInstaller.php';
+
+function __autoload($name){ $file = CORE.$name.'.php'; if(is_file($file)) { require_once $file; } }

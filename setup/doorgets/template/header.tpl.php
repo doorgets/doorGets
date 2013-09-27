@@ -31,10 +31,16 @@
 ******************************************************************************
 ******************************************************************************/
 
-session_start();
-
-define('BASE','./setup/');
-define('__DOORGETS__','http://www.doorgets.com/'); // Ne pas supprimer
-require_once BASE.'config/config.php';
-
-require_once ROUTER.'installerRouter.php';
+?><!doctype html>
+<html lang="{{!$myLanguage!}}">
+    <head>
+        <title>doorGets 5.0</title>
+        <meta charset="utf-8" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="Content-Style-Type" content="text/css" />
+	<META NAME="robots" CONTENT="noindex,nofollow,noarchive">
+        <link href="{{!BASE_CSS.'doorgets_installer.css'!}}" rel="stylesheet" type="text/css" />
+        <script  src="{{!BASE_JS.'doorgets_installer.js'!}}" type="text/javascript"></script>
+    </head>
+    <body>
+	

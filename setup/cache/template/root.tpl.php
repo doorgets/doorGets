@@ -30,11 +30,17 @@
     
 ******************************************************************************
 ******************************************************************************/
-
-session_start();
-
-define('BASE','./setup/');
-define('__DOORGETS__','http://www.doorgets.com/'); // Ne pas supprimer
-require_once BASE.'config/config.php';
-
-require_once ROUTER.'installerRouter.php';
+?>
+<div class="doorGets-content-wrapper">
+    <?php echo $doorgets->form['doorgets_root']->open('post','',''); ?>
+        <div class="doorGets-top-title-content">
+            doorGets 5.0
+        </div>
+        <div class="separateur-tb"></div>
+        <?php echo $doorgets->form['doorgets_root']->select($doorgets->l('Choisir votre langue').'<br >','language',$doorgets->getAllLanguages(),$doorgets->getLanguage()); ?>
+        <div class="separateur-tb"></div>
+        <?php echo $doorgets->form['doorgets_root']->select($doorgets->l('Choisir votre fuseau horaire').'<br >','time_zone',$this->getArrayZones(),$doorgets->getTimeZone()); ?>
+        <div class="separateur-tb"></div>
+        <div class="separateur-tb"></div>
+        <?php echo $doorgets->form['doorgets_root']->submit($doorgets->l('Etape suivante'),'','submit-next');  echo $doorgets->form['doorgets_root']->close(); ?>
+</div>

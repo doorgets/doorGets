@@ -30,11 +30,24 @@
     
 ******************************************************************************
 ******************************************************************************/
-
-session_start();
-
-define('BASE','./setup/');
-define('__DOORGETS__','http://www.doorgets.com/'); // Ne pas supprimer
-require_once BASE.'config/config.php';
-
-require_once ROUTER.'installerRouter.php';
+?>
+<div class="doorGets-content-wrapper">
+    <div class="doorGets-top-title-content">
+        doorGets 5.0
+    </div>
+    <div class="doorGets-title-content">
+        5/5 - {{!$doorgets->l("Administrateur")!}}
+    </div>
+    {{!$doorgets->form['doorgets_admin']->open('post','','')!}}
+        <div class="separateur-tb"></div>
+        {{!$doorgets->form['doorgets_admin']->input($doorgets->l('Adresse e-mail'),'email','text',$this->info['email'])!}}
+        <div class="separateur-tb"></div>
+        {{!$doorgets->form['doorgets_admin']->input($doorgets->l('Login'),'login','text',$this->info['login'])!}}
+        <div class="separateur-tb"></div>
+        {{!$doorgets->form['doorgets_admin']->input($doorgets->l('Mot de passe'),'password','text')!}}
+        <div class="separateur-tb"></div>
+        <div class="separateur-tb"></div>
+        {{!$doorgets->form['doorgets_admin']->submit($doorgets->l('Etape suivante'),'','submit-next')!}}
+    {{!$doorgets->form['doorgets_admin']->close()!}}
+    {{!$doorgets->getHtmlGoBack()!}}
+</div>

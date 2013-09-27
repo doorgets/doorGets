@@ -31,10 +31,52 @@
 ******************************************************************************
 ******************************************************************************/
 
-session_start();
-
-define('BASE','./setup/');
-define('__DOORGETS__','http://www.doorgets.com/'); // Ne pas supprimer
-require_once BASE.'config/config.php';
-
-require_once ROUTER.'installerRouter.php';
+class doorgetsController{
+    
+    public $model;
+    
+    public $view;
+    
+    public $doorgets;
+    
+    public function __construct($doorgets){
+        
+        $this->doorgets = $doorgets;
+        
+        $this->getModel();
+        $this->getView();
+        
+    }
+    
+    // return the model of te current controller
+    public function getModel()
+    {
+        
+        $nameModel = $this->doorgets->getStep().'Model';
+        $fileNameModel = MODELS.'/'.$nameModel.'.php';
+        
+        if(!is_file($fileNameModel)) return null;
+        require_once $fileNameModel;
+        
+        if(!class_exists ($nameModel)) return null;
+        $this->model = new $nameModel($this->doorgets);
+        
+        
+    }
+    
+    // return the view of the current controller
+    public function getView()
+    {
+        
+        $nameView = $this->doorgets->getStep().'View';
+        $fileNameView = VIEW.'/'.$nameView.'.php';
+        
+        if(!is_file($fileNameView)) return null;
+        require_once $fileNameView;
+        
+        if(!class_exists ($nameView)) return null;
+        $this->view = new $nameView($this->doorgets);
+        
+    }
+    
+}

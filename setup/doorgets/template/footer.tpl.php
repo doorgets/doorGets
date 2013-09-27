@@ -31,10 +31,9 @@
 ******************************************************************************
 ******************************************************************************/
 
-session_start();
-
-define('BASE','./setup/');
-define('__DOORGETS__','http://www.doorgets.com/'); // Ne pas supprimer
-require_once BASE.'config/config.php';
-
-require_once ROUTER.'installerRouter.php';
+?>
+    <div class="info-doorGets-bottom">
+        <a href="http://www.doorgets.com/t/{{!$myLanguage!}}" title="http://www.doorgets.com/t/{{!$myLanguage!}}" target="blank">{{!$this->l("doorGets est gratuit, offert par Mounir R'Quiba")!}}</a>
+    </div>
+    </boby>
+</html>

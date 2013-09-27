@@ -30,11 +30,8 @@
     
 ******************************************************************************
 ******************************************************************************/
-
-session_start();
-
-define('BASE','./setup/');
-define('__DOORGETS__','http://www.doorgets.com/'); // Ne pas supprimer
-require_once BASE.'config/config.php';
-
-require_once ROUTER.'installerRouter.php';
+?>{{!$this->getHtmlHeader();}}
+<div class="doorGets-wrapper">
+    {{!$this->content;}}
+</div>
+{{!$this->getHtmlFooter();}}

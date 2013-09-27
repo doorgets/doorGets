@@ -31,10 +31,12 @@
 ******************************************************************************
 ******************************************************************************/
 
-session_start();
-
-define('BASE','./setup/');
-define('__DOORGETS__','http://www.doorgets.com/'); // Ne pas supprimer
-require_once BASE.'config/config.php';
-
-require_once ROUTER.'installerRouter.php';
+class databaseController extends doorgetsController{
+    
+    public function __construct($doorgets){
+        
+        parent::__construct($doorgets);
+        
+    }
+    
+}

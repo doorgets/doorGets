@@ -31,10 +31,22 @@
 ******************************************************************************
 ******************************************************************************/
 
-session_start();
+class adminView extends doorgetsView{
+    
+    public $info;
+    
+    public function __construct($doorgets){
+        
+        $fileTemp = BASE.'temp/admin.php';
+        if(is_file($fileTemp)){
+            
+            $cFile = file_get_contents($fileTemp);
+            $this->info = @unserialize($cFile);
+            
+        }
+        
+        parent::__construct($doorgets);
 
-define('BASE','./setup/');
-define('__DOORGETS__','http://www.doorgets.com/'); // Ne pas supprimer
-require_once BASE.'config/config.php';
-
-require_once ROUTER.'installerRouter.php';
+    }
+    
+}
