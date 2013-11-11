@@ -2,14 +2,14 @@
 
 /*******************************************************************************
 /*******************************************************************************
-    doorGets 5.0 - 01 Nov, 2013
+    doorGets 5.1 - 27 October, 2013
     doorGets it's free PHP Open Source CMS PHP & MySQL
     Copyright (C) 2012 - 2013 By Mounir R'Quiba -> Crazy PHP Lover
     
 /*******************************************************************************
 
     Website : http://www.doorgets.com
-    Contact : http://www.doorgets.com/?contact
+    Contact : moonair@doorgets.com
     
 /*******************************************************************************
     -= One life, One code =-
@@ -506,7 +506,7 @@ class polymorphicModel extends doorgetsModel{
             
             
             INSERT INTO `_website` ( `version_doorgets`,`facebook`,`twitter`,`langue`,`langue_front`,`langue_groupe`,`theme`,`horaire`,`module_homepage`,`email` )
-            VALUES (  '5.0','doorgets','doorgets','".$this->doorgets->getLanguage()."','".$this->doorgets->getLanguage()."','a:0:{}','doorgets','".$this->doorgets->getTimeZone()."', 'home','".$adm_email."' );
+            VALUES (  '5.1','doorgets','doorgets','".$this->doorgets->getLanguage()."','".$this->doorgets->getLanguage()."','a:0:{}','doorgets','".$this->doorgets->getTimeZone()."', 'home','".$adm_email."' );
             
         ";
         
