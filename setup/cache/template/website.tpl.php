@@ -48,24 +48,22 @@ $nMyspace = 'http://www.myspace.com/';
         doorGets 5.1
     </div>
     <div class="doorGets-title-content">
-        4/5 - {{!$doorgets->l("Configurer votre site internet")!}}
+        4/5 - <?php echo $doorgets->l("Configurer votre site internet"); ?>
     </div>
-    {{!$doorgets->form['doorgets_website']->open('post','','')!}}
+    <?php echo $doorgets->form['doorgets_website']->open('post','',''); ?>
         <div class="separateur-tb"></div>
-        {{!$doorgets->form['doorgets_website']->input($doorgets->l('Titre').' * ','title','text',$this->info['title'])!}}
+        <?php echo $doorgets->form['doorgets_website']->input($doorgets->l('Titre').' * ','title','text',$this->info['title']); ?>
         <div class="separateur-tb"></div>
-        {{!$doorgets->form['doorgets_website']->input($doorgets->l('Slogan').' * ','slogan','text',$this->info['slogan'])!}}
+        <?php echo $doorgets->form['doorgets_website']->input($doorgets->l('Slogan').' * ','slogan','text',$this->info['slogan']); ?>
         <div class="separateur-tb"></div>
-        {{!$doorgets->form['doorgets_website']->input($doorgets->l('Description').' * ','description','text',$this->info['description'])!}}
+        <?php echo $doorgets->form['doorgets_website']->input($doorgets->l('Description').' * ','description','text',$this->info['description']); ?>
         <div class="separateur-tb"></div>
-        {{!$doorgets->form['doorgets_website']->input($doorgets->l('Mots clés').' * ','keywords','text',$this->info['keywords'])!}}
+        <?php echo $doorgets->form['doorgets_website']->input($doorgets->l('Mots clés').' * ','keywords','text',$this->info['keywords']); ?>
         <div class="separateur-tb"></div>
-        {{!$doorgets->form['doorgets_website']->input($doorgets->l('Copyright'),'copyright','text',$this->info['copyright'])!}}
+        <?php echo $doorgets->form['doorgets_website']->input($doorgets->l('Copyright'),'copyright','text',$this->info['copyright']); ?>
         <div class="separateur-tb"></div>
-        {{!$doorgets->form['doorgets_website']->select($doorgets->l('Année de création'),'year',$dateCreation,$this->info['year'])!}}
+        <?php echo $doorgets->form['doorgets_website']->select($doorgets->l('Année de création'),'year',$dateCreation,$this->info['year']); ?>
         <div class="separateur-tb"></div>
         <div class="separateur-tb"></div>
-        {{!$doorgets->form['doorgets_website']->submit($doorgets->l('Etape suivante'),'','submit-next')!}}
-    {{!$doorgets->form['doorgets_website']->close()!}}
-    {{!$doorgets->getHtmlGoBack()!}}
+        <?php echo $doorgets->form['doorgets_website']->submit($doorgets->l('Etape suivante'),'','submit-next');  echo $doorgets->form['doorgets_website']->close();  echo $doorgets->getHtmlGoBack(); ?>
 </div>

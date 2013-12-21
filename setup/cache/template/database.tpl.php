@@ -31,41 +31,29 @@
 ******************************************************************************
 ******************************************************************************/
 
-$yDateNow = date("Y"); $dateCreation = array();
-for($i = $yDateNow;$i> ( $yDateNow - 100);$i--){ $dateCreation[(string)$i] = (int)$i; }
-
-$nFace = 'http://www.facebook.com/';
-$nTwitter = 'http://www.twitter.com/';
-$nYoutube = 'http://www.youtube.com/user/';
-$nGoogle = 'https://plus.google.com/u/0/';
-$nPinterest = 'https://www.pinterest.com/';
-$nLinkedin = 'http://www.linkedin.com/in/';
-$nMyspace = 'http://www.myspace.com/';
-
 ?>
 <div class="doorGets-content-wrapper">
     <div class="doorGets-top-title-content">
         doorGets 5.1
     </div>
     <div class="doorGets-title-content">
-        4/5 - {{!$doorgets->l("Configurer votre site internet")!}}
+        3/5 - <?php echo $doorgets->l("Connecter votre base de données"); ?>
     </div>
-    {{!$doorgets->form['doorgets_website']->open('post','','')!}}
+    <?php if(!empty($doorgets->form['doorgets_database']->i)): ?>
+    <div class="info-no-ok">
+        <?php echo $doorgets->l("La connexion n'est pas établie !"); ?>
+    </div>
+    <?php endif;  echo $doorgets->form['doorgets_database']->open('post','',''); ?>
         <div class="separateur-tb"></div>
-        {{!$doorgets->form['doorgets_website']->input($doorgets->l('Titre').' * ','title','text',$this->info['title'])!}}
+        <?php echo $doorgets->form['doorgets_database']->input($doorgets->l('Hôte'),'hote','text',$this->info['hote']); ?>
         <div class="separateur-tb"></div>
-        {{!$doorgets->form['doorgets_website']->input($doorgets->l('Slogan').' * ','slogan','text',$this->info['slogan'])!}}
+        <?php echo $doorgets->form['doorgets_database']->input($doorgets->l('Nom de la base'),'name','text',$this->info['name']); ?>
         <div class="separateur-tb"></div>
-        {{!$doorgets->form['doorgets_website']->input($doorgets->l('Description').' * ','description','text',$this->info['description'])!}}
+        <?php echo $doorgets->form['doorgets_database']->input($doorgets->l('Login'),'login','text',$this->info['login']); ?>
         <div class="separateur-tb"></div>
-        {{!$doorgets->form['doorgets_website']->input($doorgets->l('Mots clés').' * ','keywords','text',$this->info['keywords'])!}}
-        <div class="separateur-tb"></div>
-        {{!$doorgets->form['doorgets_website']->input($doorgets->l('Copyright'),'copyright','text',$this->info['copyright'])!}}
-        <div class="separateur-tb"></div>
-        {{!$doorgets->form['doorgets_website']->select($doorgets->l('Année de création'),'year',$dateCreation,$this->info['year'])!}}
+        <?php echo $doorgets->form['doorgets_database']->input($doorgets->l('Mot de passe'),'password','text'); ?>
         <div class="separateur-tb"></div>
         <div class="separateur-tb"></div>
-        {{!$doorgets->form['doorgets_website']->submit($doorgets->l('Etape suivante'),'','submit-next')!}}
-    {{!$doorgets->form['doorgets_website']->close()!}}
-    {{!$doorgets->getHtmlGoBack()!}}
+        <div class="separateur-tb"></div>
+        <?php echo $doorgets->form['doorgets_database']->submit($doorgets->l('Etape suivante'),'','submit-next');  echo $doorgets->form['doorgets_database']->close();  echo $doorgets->getHtmlGoBack(); ?>
 </div>

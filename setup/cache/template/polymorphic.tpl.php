@@ -30,53 +30,30 @@
     
 ******************************************************************************
 ******************************************************************************/
-
-class doorgetsController{
-    
-    public $model;
-    
-    public $view;
-    
-    public $doorgets;
-    
-    public function __construct($doorgets){
-        
-        $this->doorgets = $doorgets;
-        
-        $this->getModel();
-        $this->getView();
-        
-    }
-    
-    // return the model of te current controller
-    public function getModel()
-    {
-        
-        $nameModel = $this->doorgets->getStep().'Model';
-        $fileNameModel = MODELS.'/'.$nameModel.'.php';
-        
-        if(!is_file($fileNameModel)) return null;
-        require_once $fileNameModel;
-        
-        if(!class_exists ($nameModel)) return null;
-        $this->model = new $nameModel($this->doorgets);
-        
-        
-    }
-    
-    // return the view of the current controller
-    public function getView()
-    {
-        
-        $nameView = $this->doorgets->getStep().'View';
-        $fileNameView = VIEW.'/'.$nameView.'.php';
-        
-        if(!is_file($fileNameView)) return null;
-        require_once $fileNameView;
-        
-        if(!class_exists ($nameView)) return null;
-        $this->view = new $nameView($this->doorgets);
-        
-    }
-    
-}
+?>
+<div class="doorGets-content-wrapper">
+    <div class="doorGets-top-title-content">
+        doorGets 5.1
+    </div>
+    <div class="doorGets-title-content">
+        <?php echo $doorgets->l("Vous avez presque fini..."); ?>
+    </div>
+    <?php echo $doorgets->form['doorgets_polymorphic']->open('post','',''); ?>
+        <?php echo $doorgets->form['doorgets_polymorphic']->input('','hidden','hidden','1'); ?>
+        <div class="t-polymorphic-center">
+            <div>
+                <?php echo $doorgets->l("Cliquez sur le bouton ci-dessous pour générer votre site."); ?>
+                <br />
+                <?php echo $doorgets->l("Vous allez être ensuite redirigé vers la page d'administration."); ?>
+                <br /><br />
+            </div>
+            <?php echo $doorgets->form['doorgets_polymorphic']->submit($doorgets->l('Génerer mon site internet doorGets')); ?>
+            <div>
+                <br />
+                <i>" <?php echo $doorgets->l('Merci'); ?> ! "</i> 
+            </div>
+        </div>
+    <?php echo $doorgets->form['doorgets_polymorphic']->close(); ?>
+    <div class="separateur-tb"></div>
+    <?php echo $doorgets->getHtmlGoBack(); ?>
+</div>

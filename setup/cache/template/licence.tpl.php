@@ -32,15 +32,15 @@
 ******************************************************************************/
 ?>
 <div class="doorGets-content-wrapper">
-    {{!$doorgets->form['doorgets_licence']->open('post','','')!}}
+    <?php echo $doorgets->form['doorgets_licence']->open('post','',''); ?>
         <div class="doorGets-top-title-content">
             doorGets 5.1
         </div>
         <div class="doorGets-title-content">
-            1/5 - {{!$doorgets->l("Conditions générales d'utilisation")!}}
+            1/5 - <?php echo $doorgets->l("Conditions générales d'utilisation"); ?>
         </div>
         <div class="separateur-tb"></div>
-        {{!$doorgets->form['doorgets_licence']->input('','hidden','hidden','1')!}}
+        <?php echo $doorgets->form['doorgets_licence']->input('','hidden','hidden','1'); ?>
         <div class="licence-text">
         
             <h3 style="text-align: center;">GNU GENERAL PUBLIC LICENSE</h3>
@@ -672,10 +672,8 @@
             
             <p>END OF TERMS AND CONDITIONS</p>
         </div>
-        {{!$doorgets->form['doorgets_licence']->checkbox($doorgets->l("J'ai lu et j'accepte les conditions d'utilisation de doorGets"),'licence_validation','1','')!}}
+        <?php echo $doorgets->form['doorgets_licence']->checkbox($doorgets->l("J'ai lu et j'accepte les conditions d'utilisation de doorGets"),'licence_validation','1',''); ?>
         <div class="separateur-tb"></div>
         <div class="separateur-tb"></div>
-        {{!$doorgets->form['doorgets_licence']->submit($doorgets->l('Etape suivante'),'','submit-next')!}}
-    {{!$doorgets->form['doorgets_licence']->close()!}}
-    {{!$doorgets->getHtmlGoBack()!}}
+        <?php echo $doorgets->form['doorgets_licence']->submit($doorgets->l('Etape suivante'),'','submit-next');  echo $doorgets->form['doorgets_licence']->close();  echo $doorgets->getHtmlGoBack(); ?>
 </div>

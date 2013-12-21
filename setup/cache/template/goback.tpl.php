@@ -30,53 +30,9 @@
     
 ******************************************************************************
 ******************************************************************************/
-
-class doorgetsController{
-    
-    public $model;
-    
-    public $view;
-    
-    public $doorgets;
-    
-    public function __construct($doorgets){
-        
-        $this->doorgets = $doorgets;
-        
-        $this->getModel();
-        $this->getView();
-        
-    }
-    
-    // return the model of te current controller
-    public function getModel()
-    {
-        
-        $nameModel = $this->doorgets->getStep().'Model';
-        $fileNameModel = MODELS.'/'.$nameModel.'.php';
-        
-        if(!is_file($fileNameModel)) return null;
-        require_once $fileNameModel;
-        
-        if(!class_exists ($nameModel)) return null;
-        $this->model = new $nameModel($this->doorgets);
-        
-        
-    }
-    
-    // return the view of the current controller
-    public function getView()
-    {
-        
-        $nameView = $this->doorgets->getStep().'View';
-        $fileNameView = VIEW.'/'.$nameView.'.php';
-        
-        if(!is_file($fileNameView)) return null;
-        require_once $fileNameView;
-        
-        if(!class_exists ($nameView)) return null;
-        $this->view = new $nameView($this->doorgets);
-        
-    }
-    
-}
+?>
+<div>
+    <?php echo $this->form['prev_step']->open('post','',''); ?>
+        <?php echo $this->form['prev_step']->input('','hidden','hidden','1'); ?>
+        <?php echo $this->form['prev_step']->submit($this->l('Etape précédente'),'','submit-prev');  echo $this->form['prev_step']->close(); ?>
+</div>
