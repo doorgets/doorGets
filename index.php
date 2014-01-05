@@ -2,7 +2,7 @@
 
 /*******************************************************************************
 /*******************************************************************************
-    doorGets 5.1 - 21, December 2013
+    doorGets 5.2 - 05, January 2014
     doorGets it's free PHP Open Source CMS PHP & MySQL
     Copyright (C) 2012 - 2013 By Mounir R'Quiba -> Crazy PHP Lover
     
@@ -34,7 +34,7 @@
 session_start();
 
 define('BASE','./setup/');
-define('__DOORGETS__','http://www.doorgets.com/'); // Ne pas supprimer
+define('DOORGETS','http://www.doorgets.com/'); // Ne pas supprimer
 require_once BASE.'config/config.php';
 
 require_once ROUTER.'installerRouter.php';

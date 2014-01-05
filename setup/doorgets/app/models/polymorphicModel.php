@@ -2,7 +2,7 @@
 
 /*******************************************************************************
 /*******************************************************************************
-    doorGets 5.1 - 21, December 2013
+    doorGets 5.2 - 05, January 2014
     doorGets it's free PHP Open Source CMS PHP & MySQL
     Copyright (C) 2012 - 2013 By Mounir R'Quiba -> Crazy PHP Lover
     
@@ -320,6 +320,8 @@ class polymorphicModel extends doorgetsModel{
                 `bynum` int(11) DEFAULT '10',
                 `avoiraussi` int(11) NOT NULL DEFAULT '3',
                 `image` varchar(255) DEFAULT NULL,
+                `template_index` varchar(255) DEFAULT NULL,
+                `template_content` varchar(255) DEFAULT NULL,
                 `notification_mail` int(11) NOT NULL DEFAULT '1',
                 `date_creation` int(11) NOT NULL,
                 PRIMARY KEY (`id`)
@@ -506,7 +508,7 @@ class polymorphicModel extends doorgetsModel{
             
             
             INSERT INTO `_website` ( `version_doorgets`,`facebook`,`twitter`,`langue`,`langue_front`,`langue_groupe`,`theme`,`horaire`,`module_homepage`,`email` )
-            VALUES (  '5.1','doorgets','doorgets','".$this->doorgets->getLanguage()."','".$this->doorgets->getLanguage()."','a:0:{}','doorgets','".$this->doorgets->getTimeZone()."', 'home','".$adm_email."' );
+            VALUES (  '5.2','doorgets','doorgets','".$this->doorgets->getLanguage()."','".$this->doorgets->getLanguage()."','a:0:{}','doorgets','".$this->doorgets->getTimeZone()."', 'home','".$adm_email."' );
             
         ";
         

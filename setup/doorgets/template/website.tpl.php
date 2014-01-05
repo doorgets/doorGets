@@ -2,7 +2,7 @@
 
 /*******************************************************************************
 /*******************************************************************************
-    doorGets 5.1 - 21, December 2013
+    doorGets 5.2 - 05, January 2014
     doorGets it's free PHP Open Source CMS PHP & MySQL
     Copyright (C) 2012 - 2013 By Mounir R'Quiba -> Crazy PHP Lover
     
@@ -45,7 +45,7 @@ $nMyspace = 'http://www.myspace.com/';
 ?>
 <div class="doorGets-content-wrapper">
     <div class="doorGets-top-title-content">
-        doorGets 5.1
+        doorGets 5.2
     </div>
     <div class="doorGets-title-content">
         4/5 - {{!$doorgets->l("Configurer votre site internet")!}}
