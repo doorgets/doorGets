@@ -2,9 +2,9 @@
 
 /*******************************************************************************
 /*******************************************************************************
-    doorGets 5.2 - 05, January 2014
+    doorGets 5.2 - 13, January 2014
     doorGets it's free PHP Open Source CMS PHP & MySQL
-    Copyright (C) 2012 - 2013 By Mounir R'Quiba -> Crazy PHP Lover
+    Copyright (C) 2012 - 2014 By Mounir R'Quiba -> Crazy PHP Lover
     
 /*******************************************************************************
 
