@@ -1,14 +1,15 @@
 {
     "name": "doorgets/cms",
     "description": "doorGets CMS is web software you can use to create a beautiful website like wordpress but most simply",
-    "license": "GNU GPL V3",
+    "keywords": ["blog", "cms", "doorgets"],
+    "license": "GPL-3.0+",
     "authors": [
         {
-            "name": "mounir r quiba",
-            "email": "moonair@doorgets.com"
+            "name": "mounir rquiba",
+            "homepage": "http://www.doorgets.com/"
         }
     ],
     "require": {
-
+        "php": ">=5.2.2",
     }
 }
