@@ -1,5 +1,6 @@
 {
     "name": "doorgets/cms",
+    "type": "project",
     "description": "doorGets CMS is web software you can use to create a beautiful website like wordpress but most simply",
     "keywords": ["blog", "cms", "doorgets"],
     "license": "GPL-3.0+",
@@ -9,28 +10,10 @@
             "homepage": "http://www.doorgets.com/"
         }
     ],
-    "repositories": [
-    {
-      "type": "package",
-      "package": {
-        "name": "doorgets",
-        "type": "webroot",
-        "version": "6.0",
-        "dist": {
-          "type": "zip",
-          "url": "https://github.com/doorgets/doorGets/archive/master.zip"
-        },
-        "require" : {
-          
-        }
-      }
-    }
-  ],
-  "require": {
-    
-  },
-  "extra": {
-    "webroot-dir": "dg",
-    "webroot-package": "doorgets"
-  }
+    "require": {
+        
+    },
+    "autoload": {
+        "psr-0": { "": "src/" }
+    },
 }
