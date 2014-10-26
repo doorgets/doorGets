@@ -188,5 +188,20 @@ class rootView extends doorgetsView{
         
         return $array;
     }
+
+    public function isChmod777(){
+        
+        try{
+            
+            $file = dirname('index.php');
+            if(@is_writable($file)){
+                return true;
+            }
+            
+            return false;
+            
+        }catch(Exception $e){  }
+        
+    }
     
 }

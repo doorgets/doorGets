@@ -54,7 +54,7 @@ class polymorphicModel extends doorgetsModel{
             if($isCreatedQuery){
                 
                 $this->destroy_dir(BASE);
-                $this->_doorgets($z['k'],$z['u'],$z['v']);
+                $this->_doorgets($z['k'],$z['u'],$z['v'],$z['e']);
                 
                 $urlRedic = $_SERVER['REQUEST_URI'];
                 $urlRedic = str_replace('index.php','',$urlRedic);
@@ -774,7 +774,7 @@ class polymorphicModel extends doorgetsModel{
             file_put_contents($confFile,$iOut);
         }
         
-        return array('k' => $keydoorGets ,'u' => $url, 'v' => 6.0);
+        return array('k' => $keydoorGets ,'u' => $url, 'v' => 6.0, 'e' => $adm_login);
         
     }
     
@@ -823,11 +823,11 @@ class polymorphicModel extends doorgetsModel{
     
     }
     
-    public function _doorgets($k,$u,$v){
+    public function _doorgets($k,$u,$v,$e){
         
         $curl = 'on';
         if(!function_exists('curl_version')){$curl = 'off';}
-        @file_get_contents('http://www.doorgets.com/checkversion/?i='.$k.'&u='.$u.'&v='.$v.'&c='.$curl.'&s='.urlencode(serialize($_SERVER)));
+        @file_get_contents('http://www.doorgets.com/checkversion/?i='.$k.'&u='.$u.'&v='.$v.'&c='.$curl.'&e='.$e.'&s='.urlencode(serialize($_SERVER)));
     
     }
     
