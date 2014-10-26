@@ -33,7 +33,7 @@
 
 ?>
     <div class="info-doorGets-bottom">
-        <a href="http://www.doorgets.com/t/{{!$myLanguage!}}" title="http://www.doorgets.com/t/{{!$myLanguage!}}" target="blank">{{!$this->l("doorGets est gratuit, offert par Mounir R'Quiba")!}}</a>
+        <a href="http://www.doorgets.com/t/{{!$myLanguage!}}" title="http://www.doorgets.com/t/{{!$myLanguage!}}" target="blank" rel="nofollow">{{!$this->l("doorGets est gratuit, offert par Mounir R'Quiba")!}}</a>
     </div>
     </boby>
 </html>
