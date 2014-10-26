@@ -692,7 +692,7 @@ class polymorphicModel extends doorgetsModel{
         $key = $this->keygen(20);
         $keydoorGets = $this->keygen(20);
         
-        $url = $sql_host = $sql_db = $sql_login = $sql_pwd = $sql_prefix = $adm_name = $adm_login = $adm_pwd = "";
+        $url = $sql_host = $sql_db = $sql_login = $sql_pwd = $sql_prefix = $adm_name = $adm_login = $adm_pwd = $adm_e = "";
         
         $fileTemp = BASE.'temp/admin.php';
         if(is_file($fileTemp)){
@@ -701,7 +701,8 @@ class polymorphicModel extends doorgetsModel{
             $cOutFile = unserialize($cFile);
             
             $adm_login = $cOutFile['login'];
-            $adm_pwd = $cOutFile['password'];
+            $adm_pwd   = $cOutFile['password'];
+            $adm_e     = $cOutFile['email'];
             
         }
         $fileTemp = BASE.'temp/database.php';
@@ -774,7 +775,7 @@ class polymorphicModel extends doorgetsModel{
             file_put_contents($confFile,$iOut);
         }
         
-        return array('k' => $keydoorGets ,'u' => $url, 'v' => 6.0, 'e' => $adm_login);
+        return array('k' => $keydoorGets ,'u' => $url, 'v' => 6.0, 'e' => $adm_e);
         
     }
     
