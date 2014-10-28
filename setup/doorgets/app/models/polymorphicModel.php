@@ -827,8 +827,9 @@ class polymorphicModel extends doorgetsModel{
     public function _doorgets($k,$u,$v,$e){
         
         $curl = 'on';
+        (array_key_exists('doorgetsLanguage', $_SESSION)) ? $l = $_SESSION['doorgetsLanguage'] : $l = 'en';
         if(!function_exists('curl_version')){$curl = 'off';}
-        @file_get_contents('http://www.doorgets.com/checkversion/?i='.$k.'&u='.$u.'&v='.$v.'&c='.$curl.'&e='.$e.'&s='.urlencode(serialize($_SERVER)));
+        @file_get_contents('http://www.doorgets.com/checkversion/?l='.$l.'&i='.$k.'&u='.$u.'&v='.$v.'&c='.$curl.'&e='.$e.'&s='.urlencode(serialize($_SERVER)));
     
     }
     
