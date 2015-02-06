@@ -2,9 +2,9 @@
 
 /*******************************************************************************
 /*******************************************************************************
-    doorGets 5.1 - 27 October, 2013
+    doorGets 6.0 - 20, February 2014
     doorGets it's free PHP Open Source CMS PHP & MySQL
-    Copyright (C) 2012 - 2013 By Mounir R'Quiba -> Crazy PHP Lover
+    Copyright (C) 2012 - 2014 By Mounir R'Quiba -> Crazy PHP Lover
     
 /*******************************************************************************
 
@@ -39,7 +39,7 @@ class Template{
         
         $cacheDirectory = CACHE_TEMPLATE;
         
-        if(!is_dir($cacheDirectory)){ mkdir($cacheDirectory); }
+        if(!is_dir($cacheDirectory)){ mkdir($cacheDirectory, 0777, true); }
         
         // Explode $name for create dir if not exists
         $explodeName = explode('/',$name);
@@ -62,7 +62,7 @@ class Template{
                 
                 if(!is_dir($cacheDirectory.$dirNewName)){
                     
-                    mkdir($cacheDirectory.$dirNewName);
+                    mkdir($cacheDirectory.$dirNewName, 0777, true);
                     
                 }
                 
@@ -102,7 +102,7 @@ class Template{
     <?php" => '',
             "?>
                 <?php" => '',
-                "if( !defined(__DOORGETS__) ){ header('Location:../'); exit(); }" => '',
+                "if( !defined(DOORGETS) ){ header('Location:../'); exit(); }" => '',
             
                 
             );

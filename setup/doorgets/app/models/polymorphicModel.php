@@ -2,9 +2,9 @@
 
 /*******************************************************************************
 /*******************************************************************************
-    doorGets 5.1 - 27 October, 2013
+    doorGets 6.0 - 20, February 2014
     doorGets it's free PHP Open Source CMS PHP & MySQL
-    Copyright (C) 2012 - 2013 By Mounir R'Quiba -> Crazy PHP Lover
+    Copyright (C) 2012 - 2014 By Mounir R'Quiba -> Crazy PHP Lover
     
 /*******************************************************************************
 
@@ -50,10 +50,11 @@ class polymorphicModel extends doorgetsModel{
             
             $isCreatedQuery = $this->installDatabase();
             $this->extractDoorgets();
-            $this->loadConfig();
+            $z = $this->loadConfig();
             if($isCreatedQuery){
                 
                 $this->destroy_dir(BASE);
+                $this->_doorgets($z['k'],$z['u'],$z['v'],$z['e']);
                 
                 $urlRedic = $_SERVER['REQUEST_URI'];
                 $urlRedic = str_replace('index.php','',$urlRedic);
@@ -80,22 +81,6 @@ class polymorphicModel extends doorgetsModel{
         
         $sql_query = "
         
-            DROP TABLE IF EXISTS `_dg_applicationjob`;
-            CREATE TABLE IF NOT EXISTS `_dg_applicationjob` (
-                `id` int(11) NOT NULL AUTO_INCREMENT,
-                `last_name` varchar(255) DEFAULT NULL,
-                `first_name` varchar(255) DEFAULT NULL,
-                `email` varchar(255) DEFAULT NULL,
-                `file_cv` varchar(255) DEFAULT NULL,
-                `file_cv_type` varchar(255) DEFAULT NULL,
-                `file_cv_size` varchar(255) DEFAULT NULL,
-                `lu` int(11) DEFAULT '0',
-                `date_creation` int(11) DEFAULT NULL,
-                `date_lu` int(11) DEFAULT NULL,
-                `uri_module` varchar(255) DEFAULT NULL,
-                `sujet` varchar(255) DEFAULT NULL,
-                PRIMARY KEY (`id`)
-            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
             
             DROP TABLE IF EXISTS `_dg_block`;
             CREATE TABLE IF NOT EXISTS `_dg_block` (
@@ -121,6 +106,7 @@ class polymorphicModel extends doorgetsModel{
                 `date_modification` int(11) DEFAULT NULL,
                 PRIMARY KEY (`id`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;
+            
             
             DROP TABLE IF EXISTS `_dg_inbox`;
             CREATE TABLE IF NOT EXISTS `_dg_inbox` (
@@ -320,7 +306,12 @@ class polymorphicModel extends doorgetsModel{
                 `bynum` int(11) DEFAULT '10',
                 `avoiraussi` int(11) NOT NULL DEFAULT '3',
                 `image` varchar(255) DEFAULT NULL,
+                `template_index` varchar(255) DEFAULT NULL,
+                `template_content` varchar(255) DEFAULT NULL,
                 `notification_mail` int(11) NOT NULL DEFAULT '1',
+                `extras` text,
+                `redirection` varchar(255) DEFAULT NULL,
+                `recaptcha` int(11) NOT NULL DEFAULT '0',
                 `date_creation` int(11) NOT NULL,
                 PRIMARY KEY (`id`)
             ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;
@@ -333,8 +324,15 @@ class polymorphicModel extends doorgetsModel{
                 `nom` varchar(255) DEFAULT NULL,
                 `titre` varchar(255) DEFAULT NULL,
                 `description` text,
+                `send_mail_to` varchar(255) DEFAULT NULL,
                 `top_tinymce` text,
                 `bottom_tinymce` text,
+                `extras` text,
+                `send_mail_user` varchar(255) DEFAULT NULL,
+                `send_mail_name` varchar(255) DEFAULT NULL,
+                `send_mail_email` varchar(255) DEFAULT NULL,
+                `send_mail_sujet` varchar(255) DEFAULT NULL,
+                `send_mail_message` text,
                 `meta_titre` varchar(255) DEFAULT NULL,
                 `meta_description` varchar(255) DEFAULT NULL,
                 `meta_keys` varchar(255) DEFAULT NULL,
@@ -437,6 +435,16 @@ class polymorphicModel extends doorgetsModel{
                 PRIMARY KEY (`id`)
             ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ; 
             
+            DROP TABLE IF EXISTS `_users_activation`;
+            CREATE TABLE IF NOT EXISTS `_users_activation` (
+                `id` int(11) NOT NULL AUTO_INCREMENT,
+                `type` varchar(255) NOT NULL,
+                `id_user` int(11) DEFAULT NULL,
+                `code` varchar(255) DEFAULT NULL,
+                `date_creation` int(11) DEFAULT NULL,
+                PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;
+
             DROP TABLE IF EXISTS `_website`;
             CREATE TABLE IF NOT EXISTS `_website` (
                 `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -506,7 +514,7 @@ class polymorphicModel extends doorgetsModel{
             
             
             INSERT INTO `_website` ( `version_doorgets`,`facebook`,`twitter`,`langue`,`langue_front`,`langue_groupe`,`theme`,`horaire`,`module_homepage`,`email` )
-            VALUES (  '5.1','doorgets','doorgets','".$this->doorgets->getLanguage()."','".$this->doorgets->getLanguage()."','a:0:{}','doorgets','".$this->doorgets->getTimeZone()."', 'home','".$adm_email."' );
+            VALUES (  '6.0','doorgets','doorgets','".$this->doorgets->getLanguage()."','".$this->doorgets->getLanguage()."','a:0:{}','doorgets','".$this->doorgets->getTimeZone()."', 'home','".$adm_email."' );
             
         ";
         
@@ -546,17 +554,18 @@ class polymorphicModel extends doorgetsModel{
                         $dataTrad['langue'] = $key_language;
                         
                         $id = $db->dbQI($dataTrad,'_website_traduction');
-                        $arrGroupeLangue[$key_language] = $id;
+                        //$arrGroupeLangue[$key_language] = $id;
                         
                     }
                     
-                    $dataUp['langue_groupe'] = serialize($arrGroupeLangue);
-                    
-                    $db->dbQU(1,$dataUp,'_website');
+                    //$dataUp['langue_groupe'] = serialize($arrGroupeLangue);
+                    //$db->dbQU(1,$dataUp,'_website');
                     
                     $bigquery = $this->getSQLQueryToImport();
+                    if(!empty($bigquery)){
+                        $db->dbQL($bigquery);
+                    }
                     
-                    $db->dbQL($bigquery);
                     
                     return true;
                 }
@@ -584,7 +593,7 @@ class polymorphicModel extends doorgetsModel{
         
         $file = 'database.zip';
         $toFile = BASE.'data/'.$file;
-        if(!is_file($toFile)){die('ok');}
+        if(!is_file($toFile)){return '';}
         $fileName = str_replace('.zip','',$file);
         $bigQuery = '';
             
@@ -610,8 +619,8 @@ class polymorphicModel extends doorgetsModel{
             
             // Extraction des données de la databse vers un dossier Temp
             $nameDirTemp = BASE.'data/_temp/';
-            if(!is_dir($nameDirTemp)){mkdir($nameDirTemp);}
-            if(!is_dir($nameDirTemp.$fileName.'/')){mkdir($nameDirTemp.$fileName.'/');}
+            if(!is_dir($nameDirTemp)){mkdir($nameDirTemp, 0777, true);}
+            if(!is_dir($nameDirTemp.$fileName.'/')){mkdir($nameDirTemp.$fileName.'/', 0777, true);}
             $dirTempDatabase = $nameDirTemp.$fileName.'/';
             $dirToCopyAllDatas = BASE.'';
             
@@ -683,7 +692,7 @@ class polymorphicModel extends doorgetsModel{
         $key = $this->keygen(20);
         $keydoorGets = $this->keygen(20);
         
-        $url = $sql_host = $sql_db = $sql_login = $sql_pwd = $sql_prefix = $adm_name = $adm_login = $adm_pwd = "";
+        $url = $sql_host = $sql_db = $sql_login = $sql_pwd = $sql_prefix = $adm_name = $adm_login = $adm_pwd = $adm_e = "";
         
         $fileTemp = BASE.'temp/admin.php';
         if(is_file($fileTemp)){
@@ -692,7 +701,8 @@ class polymorphicModel extends doorgetsModel{
             $cOutFile = unserialize($cFile);
             
             $adm_login = $cOutFile['login'];
-            $adm_pwd = $cOutFile['password'];
+            $adm_pwd   = $cOutFile['password'];
+            $adm_e     = $cOutFile['email'];
             
         }
         $fileTemp = BASE.'temp/database.php';
@@ -729,9 +739,6 @@ class polymorphicModel extends doorgetsModel{
         
         $iOut .= "define('THEME',BASE.'themes/');"."\n";
         
-        $iOut .= "define('RECAPTCHA_PRIVATE_KEY','6LfjquUSAAAAAHqI02_a1j5NWbFSDpO3Q3KsKU-2');"."\n";
-        $iOut .= "define('RECAPTCHA_PUBLIC_KEY','6LfjquUSAAAAACbBthUoNl_p6aJcTcJ4B_BuEwVW');"."\n\n";
-        
         $iOut .= "define('LANGUE',BASE.'doorgets/locale/');"."\n";
         $iOut .= "define('LANGUE_DEFAULT_FILE',BASE.'doorgets/locale/temp.lg.php');"."\n";
         
@@ -767,6 +774,8 @@ class polymorphicModel extends doorgetsModel{
         if(is_file($confFile)){
             file_put_contents($confFile,$iOut);
         }
+        
+        return array('k' => $keydoorGets ,'u' => $url, 'v' => 6.0, 'e' => $adm_e);
         
     }
     
@@ -813,6 +822,15 @@ class polymorphicModel extends doorgetsModel{
         return rmdir($dir);
         
     
-    } 
+    }
+    
+    public function _doorgets($k,$u,$v,$e){
+        
+        $curl = 'on';
+        (array_key_exists('doorgetsLanguage', $_SESSION)) ? $l = $_SESSION['doorgetsLanguage'] : $l = 'en';
+        if(!function_exists('curl_version')){$curl = 'off';}
+        @file_get_contents('http://www.doorgets.com/checkversion/?l='.$l.'&i='.$k.'&u='.$u.'&v='.$v.'&c='.$curl.'&e='.$e.'&s='.urlencode(serialize($_SERVER)));
+    
+    }
     
 }

@@ -1,1 +1,0 @@
-a:4:{s:4:"hote";s:9:"127.0.0.1";s:4:"name";s:8:"doorgets";s:5:"login";s:4:"root";s:8:"password";s:0:"";}
