@@ -40,7 +40,6 @@
         <meta http-equiv="Content-Style-Type" content="text/css" />
 	<META NAME="robots" CONTENT="noindex,nofollow,noarchive">
         <link href="{{!BASE_CSS.'doorgets_installer.css'!}}" rel="stylesheet" type="text/css" />
-        <script  src="{{!BASE_JS.'doorgets_installer.js'!}}" type="text/javascript"></script>
     </head>
     <body>
 	
